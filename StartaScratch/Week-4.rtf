@@ -1,0 +1,53 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh12240\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 Query-1: Calculate each user's average session time. A session is defined as the time difference between a page_load and page_exit. For simplicity, assume a user has only 1 session per day and if there are multiple of the same events on that day, consider only the latest page_load and earliest page_exit. Output the user_id and their average session time.\
+\
+ID: 
+\fs26 10352
+\fs28 \
+\
+Solution:\
+\
+WITH temp AS (\
+SELECT user_id, \
+               MAX(CASE WHEN action= 'page_load' THEN timestamp ELSE null END) AS session_start,\
+               MIN(CASE WHEN action= 'page_exit'  THEN timestamp ELSE null END) AS session_end\
+FROM facebook_web_log\
+GROUP BY user_id, DATE(timestamp)\
+)\
+\
+SELECT user_id, AVG(TIMESTAMPDIFF(SECOND, session_start, session_end)) AS average_difference\
+FROM temp\
+WHERE session_start IS NOT NULL AND session_end IS NOT NULL\
+GROUP BY user_id;\
+\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\
+Query-2: Write a query that'll identify returning active users. A returning active user is a user that has made a second purchase within 7 days of any other of their purchases. Output a list of user_ids of these returning active users.\
+\
+ID: 
+\fs26 10322
+\fs28 \
+\
+Solution:\
+\
+SELECT DISTINCT t1.user_id \
+FROM amazon_transactions AS t1 \
+JOIN amazon_transactions AS t2\
+WHERE ABS(DATEDIFF(t1.created_at, t2.created_at)) <= 7 \
+AND t1.user_id = t2.user_id AND t1.id != t2.id \
+GROUP BY t1.user_id\
+ORDER BY t1.user_id;\
+\
+\
+\
+\
+\
+}

@@ -1,0 +1,53 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh12240\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 Query-1: Find order details made by Jill and Eva. Consider the Jill and Eva as first names of customers.\
+Output the order date, details and cost along with the first name. Order records based on the customer id in ascending order.\
+\
+ID: 
+\fs26 9913
+\fs28 \
+\
+Solution:\
+\
+SELECT o.order_date, o.order_details, o.total_order_cost, c.first_name\
+FROM orders AS o, customers AS c\
+WHERE c.id = o.cust_id AND (c.first_name = "Jill" OR c.first_name = "Eva")\
+ORDER BY c.id;\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Query-2: Count the number of movies that Abigail Breslin was nominated for an oscar.\
+\
+ID: 
+\fs26 10128
+\fs28 \
+\
+Solution:\
+\
+SELECT COUNT(nominee) AS Count_of_oscars\
+FROM oscar_nominees\
+WHERE nominee = "Abigail Breslin";\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Query-3: Find how many times each artist appeared on the Spotify ranking list. Output the artist name along with the corresponding number of occurrences. Order records by the number of occurrences in descending order.\
+\
+ID: 
+\fs26 9992
+\fs28 \
+\
+Solution:\
+\
+SELECT COUNT(nominee) AS Count_of_oscars\
+FROM oscar_nominees\
+WHERE nominee = "Abigail Breslin";\
+\
+\
+\
+\
+}

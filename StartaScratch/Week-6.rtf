@@ -1,0 +1,61 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh12240\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 Query-1: Find the base pay for Police Captains.Output the employee name along with the corresponding base pay.\
+\
+ID: 
+\fs26 9972
+\fs28 \
+\
+Solution:\
+\
+SELECT employeename, basepay\
+FROM sf_public_salaries\
+WHERE jobtitle LIKE '%CAPTAIN%POLICE%' \
+ORDER BY employeename;\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Query-2: Count the number of user events performed by MacBookPro users. Output the result along with the event name. Sort the result based on the event count in the descending order.\
+\
+ID: 
+\fs26 9653
+\fs28 \
+\
+Solution:\
+\
+SELECT event_name, COUNT(event_name) AS MacBookPro_Event\
+FROM playbook_events\
+WHERE device = "macbook pro"\
+GROUP BY event_name\
+ORDER BY MacBookPro_Event DESC;\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Query-3: Find the average number of bathrooms and bedrooms for each city\'92s property types. Output the result along with the city name and the property type.\
+\
+ID: 
+\fs26 9622
+\fs28 \
+\
+Solution:\
+\
+SELECT city,\
+       property_type,\
+       AVG(bathrooms) AS n_bathrooms_avg,\
+       AVG(bedrooms) AS  n_bedrooms_avg\
+FROM airbnb_search_details\
+GROUP BY city, property_type\
+ORDER BY property_type;\
+\
+\
+\
+\
+\
+\
+\
+}

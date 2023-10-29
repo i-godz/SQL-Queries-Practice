@@ -1,0 +1,79 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh12240\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 Query-1: Write a query that calculates the difference between the highest salaries found in the marketing and engineering departments. Output just the absolute difference in salaries.
+\fs26 \
+
+\fs28 \
+ID: 
+\fs26 10308
+\fs28 \
+\
+Solution:\
+\
+with marketing as (\
+select department, max(salary) as salary\
+from db_employee as emp\
+join db_dept as dep\
+on emp.department_id = dep.id\
+where dep.department = "marketing"\
+group by dep.department \
+), \
+\
+engineering as (\
+select department, max(salary) as salary\
+from db_employee as emp\
+join db_dept as dep\
+on emp.department_id = dep.id\
+where dep.department = "engineering"\
+group by dep.department \
+)\
+\
+select abs(mar.salary - eng.salary) as salary_difference\
+from marketing as mar, engineering as eng\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\
+Query-2: Find the details of each customer regardless of whether the customer made an order. Output the customer's first name, last name, and the city along with the order details.\
+You may have duplicate rows in your results due to a customer ordering several of the same items. Sort records based on the customer's first name and the order details in ascending order.\
+\
+ID: 
+\fs26 9891
+\fs28 \
+\
+Solution:\
+\
+select \
+    c.first_name, \
+    c.last_name, \
+    c.city , \
+    o.order_details\
+from\
+    customers as c\
+left join\
+    orders as o on c.id = o.cust_id\
+order by \
+    c.first_name ,  o.order_details;\
+\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Query-3: You have been asked to find the job titles of the highest-paid employees.\
+Your output should include the highest-paid title or multiple titles with the same salary.\
+\
+\
+ID: 10353\
+\
+Solution:\
+\
+select worker_title, salary\
+from title as t \
+join worker as w on t.worker_ref_id = w.worker_id\
+where w.salary = (select max(salary) from worker)\
+\
+}

@@ -1,0 +1,84 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red249\green250\blue252;
+\red24\green26\blue27;}
+{\*\expandedcolortbl;;\cssrgb\c0\c1\c1;\cssrgb\c100000\c100000\c99985\c0;\cssrgb\c98039\c98431\c99216;
+\cssrgb\c12549\c13333\c14118;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14080\viewh12240\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 Query-1: \cf0 \cb1 Meta/Facebook has developed a new programing language called Hack.To measure the popularity of Hack they ran a survey with their employees. The survey included data on previous programing familiarity as well as the number of years of experience, age, gender and most importantly satisfaction with Hack. Due to an error location data was not collected, but your supervisor demands a report showing average popularity of Hack by office location. Luckily the user IDs of employees completing the surveys were stored.\
+Based on the above, find the average popularity of the Hack per office location.\
+Output the location along with the average popularity.
+\fs26 \cf4 \cb5 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 ID: 
+\fs26 \cf0 \cb1 10061
+\fs28 \cf2 \cb3 \
+\pard\tx10\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 \
+Solution:\
+\
+SELECT fb_emp.age, \
+       fb_emp.gender, \
+       fb_emp.location, \
+       AVG(fb_hack_survey.popularity)\
+   \
+FROM facebook_employees AS fb_emp\
+\
+join facebook_hack_survey AS fb_hack_survey \
+ON fb_emp.id = fb_hack_survey.employee_id\
+\
+GROUP BY fb_emp.location\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 Query-2: \cf0 \cb1 Find all posts which were reacted to with a heart. For such posts output all columns from facebook_posts table.\
+\
+ID: 
+\fs26 10087
+\fs28 \cf2 \cb3 \
+\pard\tx10\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 \
+Solution:\
+\
+SELECT DISTINCT fb_posts.*\
+\
+FROM facebook_posts AS fb_posts\
+\
+JOIN facebook_reactions AS fb_reactions\
+ON fb_reactions.poster = fb_posts.post_id\
+\
+WHERE fb_reactions.reaction = "heart"\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 Query-3: \cf0 \cb1 Find the date with the highest total energy consumption from the Meta/Facebook data centers. Output the date along with the total energy consumption across all data centers.\
+\
+ID: 
+\fs26 10064
+\fs28 \
+\pard\tx10\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 \cb3 \
+Solution:\
+\
+WITH world AS (\
+\
+SELECT * FROM fb_eu_energy \
+UNION ALL \
+\
+SELECT * FROM fb_asia_energy\
+UNION ALL \
+\
+SELECT * FROM fb_na_energy)\
+\
+SELECT date, SUM(consumption) AS total_consumption FROM world GROUP BY date ORDER BY total_consumption DESC LIMIT 2;\
+\
+}
